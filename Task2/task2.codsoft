@@ -1,0 +1,63 @@
+board = [" ", " ", " ",
+         " ", " ", " ",
+         " ", " ", " "]
+def show_board():
+    print()
+    print(board[0], "|", board[1], "|", board[2])
+    print("---------")
+    print(board[3], "|", board[4], "|", board[5])
+    print("---------")
+    print(board[6], "|", board[7], "|", board[8])
+    print()
+def winner(player):
+    if board[0] == board[1] == board[2] == player:
+        return True
+    if board[3] == board[4] == board[5] == player:
+        return True
+    if board[6] == board[7] == board[8] == player:
+        return True
+    if board[0] == board[3] == board[6] == player:
+        return True
+    if board[1] == board[4] == board[7] == player:
+        return True
+    if board[2] == board[5] == board[8] == player:
+        return True
+    if board[0] == board[4] == board[8] == player:
+        return True
+    if board[2] == board[4] == board[6] == player:
+        return True
+    return False
+def draw():
+    return " " not in board
+def ai_move():
+    for i in range(9):
+        if board[i] == " ":
+            board[i] = "O"
+            break
+print("WELCOME TO TIC TAC TOE")
+print("You = X")
+print("Computer = O")
+while True:
+    show_board()
+    move = int(input("Enter position (1-9): ")) - 1
+    if board[move] != " ":
+        print("Already Taken!")
+        continue
+    board[move] = "X"
+    if winner("X"):
+        show_board()
+        print("You Win!")
+        break
+    if draw():
+        show_board()
+        print("Match Draw!")
+        break
+    ai_move()
+    if winner("O"):
+        show_board()
+        print("Computer Wins!")
+        break
+    if draw():
+        show_board()
+        print("Match Draw!")
+        break
